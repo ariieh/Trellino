@@ -7,15 +7,23 @@
     <%= auth_token_input %>
     <label>
       Email<br>
-      <input type="text" name="user[email]">
+      <input type="text" id="input-username" name="user[email]">
     </label>
     <br>
     <label>
       Password<br>
-      <input type="password" name="user[password]">
+      <input type="password" id="input-password" name="user[password]">
     </label>
     <br>
     <input type="submit" class="btn btn-primary" value="Login">
+    <button style="margin: 10px 0px" id="sign-in-button" onclick="fillField()">Demo User</button>
     <a href="<%= new_user_url %>">New to Trellino?</a>
   </form>
 </div>
+
+<script>
+function fillField(){
+	document.getElementById('input-username').value = 'demo@example.com';
+	document.getElementById('input-password').value = 'demopassword';
+}
+</script>
