@@ -1,5 +1,5 @@
-  <h3><%= card.escape('title') %></h3>
-  <div class="close-x">&times;</div>
-  <% if (card.get('description')) {%>
-    <p><%= card.escape('description') %></p>
-  <% } %>
+<h3><%= card.escape('rank') + ": " + card.escape('title') %></h3>
+<div class="close-x">&times;</div>
+<% if (card.get('description')) {%>
+<p><%= card.escape('description') %></p>
+<% } %>

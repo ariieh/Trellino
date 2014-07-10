@@ -23,8 +23,7 @@ Trellino.Views.BoardShow = Backbone.View.extend({
       board: this.model
     });
     this.$el.html(renderedContent);
-    this.renderSubviews();
-    this.masonry();
+		$.when(this.renderSubviews()).done(this.masonry);
     this.sorting();
     this.randomizeColors();
     
@@ -36,6 +35,7 @@ Trellino.Views.BoardShow = Backbone.View.extend({
     this.removeSubviews();
     
     var $tiles = this.$('.tiles');
+		
     this.model.lists().each(function(list){
       var showListsView = new Trellino.Views.ListShow({
         model: list
@@ -53,7 +53,9 @@ Trellino.Views.BoardShow = Backbone.View.extend({
     });
   },
   masonry: function(){
-    var container = document.querySelector('.tiles');
+    var container = this.$('.tiles')[0];
+		console.log(container)
+	
     var msnry = new Masonry( container, {
       columnWidth: 290,
       itemSelector: '.list'

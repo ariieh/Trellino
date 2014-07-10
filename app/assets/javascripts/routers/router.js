@@ -4,27 +4,36 @@ Trellino.Routers.Router = Backbone.Router.extend({
     "boards/new": "boardsNew",
     "boards/:id": "boardsShow"
   },
+	
   initialize: function(options){
     this.$rootEl = options.$rootEl;
   },
+	
   boardsIndex: function(){
     var boardIndexView = new Trellino.Views.BoardIndex({
       collection: Trellino.Collections.boards
     });
     this._swapView(boardIndexView);
   },
+	
   boardsNew: function(){
 
   },
+	
   boardsShow: function(id){
-    var board = Trellino.Collections.boards.getOrFetch(id);
+		var board = new Trellino.Models.Board({id: id});
+		var that = this;
+		board.fetch({
+			success: function(){
+		    var boardShowView = new Trellino.Views.BoardShow({
+		      model: board
+		    });
     
-    var boardShowView = new Trellino.Views.BoardShow({
-      model: board
-    });
-    
-    this._swapView(boardShowView);
+		    that._swapView(boardShowView);
+			}
+		})
   },
+
   _swapView: function(view){
     if(this._currentView) this._currentView.remove();
     this._currentView = view;
